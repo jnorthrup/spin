@@ -1,96 +1,94 @@
-
-<svg id="spinthings" width="1280" height="1024"
-     xmlns="http://www.w3.org/2000/svg" version="1.1"><!--viewBox="0 0 288 288" zoomAndPan="magnify"-->
+<svg height="1024" id="spinthings" version="1.1" width="1280" xmlns="http://www.w3.org/2000/svg">
+    <!--viewBox="0 0 288 288" zoomAndPan="magnify"-->
     <defs id=thedefs>
-        <g id="seed" stroke-width=".25">
-            <circle cx=0 r=12.8 stroke="red" fill="blue"></circle>
-            <path id=slice1 d="" stroke=none                       fill=yellow></path>
-            <path id=slice2 d="" stroke=none transform=rotate(120) fill=yellow></path>
-            <path id=slice3 d="" stroke=none transform=rotate(240) fill=yellow></path>
+        <g id=seed stroke-width=.25>
+            <circle cx=0 fill=blue r=12.8 stroke=red></circle>
+            <path d fill=yellow id=slice1 stroke=none></path>
+            <path d fill=yellow id=slice2 stroke=none transform=rotate(120)></path>
+            <path d fill=yellow id=slice3 stroke=none transform=rotate(240)></path>
         </g>
     </defs>
     <!--<use xlink:href=#seed transform=translate(12.8,12.8)></use>-->
 </svg>
-<script type='text/javascript'>/**
- * Returns a random integer between min (inclusive) and max (inclusive)
- * Using Math.round() will give you a non-uniform distribution!
- */
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+<script type='text/javascript'>
+    const /**
+     * @param {*} min
+     * @param {number} max
+     */
+    getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
     const SVGNS = "http://www.w3.org/2000/svg";
     const xlinkNS = 'http://www.w3.org/1999/xlink';
-
-    var generateWedgeString2 = function (startX, startY, startAngle, endAngle, radius) {
-        var x1 = startX + radius * Math.cos(Math.PI * startAngle / 180);
-        var y1 = startY + radius * Math.sin(Math.PI * startAngle / 180);
-
-        var x2 = startX + radius * Math.cos(Math.PI * endAngle / 180);
-        var y2 = startY + radius * Math.sin(Math.PI * endAngle / 180);
-
-        var pathString = "M" + startX + " " + startY + " L" + x1 + " " + y1 + " A" + radius + " " + radius + " 0 0 1 " + x2 + " " + y2 + " z";
-        return pathString;
-    };
-    var generateWedgeString = function (startX, startY, startAngle, endAngle, radius) {
-        var x1 = startX + radius * Math.cos(Math.PI * startAngle / 180);
-        var y1 = startY + radius * Math.sin(Math.PI * startAngle / 180);
-
-        var x2 = startX + radius * Math.cos(Math.PI * endAngle / 180);
-        var y2 = startY + radius * Math.sin(Math.PI * endAngle / 180);
-
-        var pathString = "M" + startX + " " + startY + " L" + x1 + " " + y1 + " " + x2 + " " + y2 + " z";
-        return pathString;
+    /**
+     * @param {string} startX
+     * @param {string} startY
+     * @param {number} startAngle
+     * @param {number} endAngle
+     * @param {string} radius
+     */
+    const generateWedgeString2 = (startX, startY, startAngle, endAngle, radius) => {
+        const x3 = Math.PI * startAngle / 180;
+        const x4 = Math.PI * endAngle / 180;
+        const x1 = startX + radius * Math.cos(x3);
+        const x2 = startX + radius * Math.cos(x4);
+        const y1 = startY + radius * Math.sin(x3);
+        const y2 = startY + radius * Math.sin(x4);
+        return "M" + startX + " " + startY + " L" + x1 + " " + y1 + " A" + radius + " " + radius + " 0 0 1 " + x2 + " " + y2 + " z";
     };
 
-    var outerRadius = 12.8;
-    var wedgeString = generateWedgeString(0, 0, 0, 60, outerRadius);
+    const generateWedgeString = (startX, startY, startAngle, endAngle, radius) => {
+        const x3 = Math.PI * startAngle / 180;
+        const x4 = Math.PI * endAngle / 180;
+        const x1 = startX + radius * Math.cos(x3);
+        const x2 = startX + radius * Math.cos(x4);
+        const y1 = startY + radius * Math.sin(x3);
+        const y2 = startY + radius * Math.sin(x4);
+        return "M" + startX + " " + startY + " L" + x1 + " " + y1 + " " + x2 + " " + y2 + " z";
+    };
+
+    const outerRadius = 12.8;
+    const wedgeString = generateWedgeString(0, 0, 0, 60, outerRadius);
 
     document.getElementById("slice1").setAttribute("d", wedgeString);
     document.getElementById("slice2").setAttribute("d", wedgeString);
     document.getElementById("slice3").setAttribute("d", wedgeString);
 
-    var x, y;
-
+    let x, y;
 
     const theDefs = document.getElementById('thedefs');
 
     const spinthings = document.getElementById('spinthings');
-    var c;
+    let c;
 
     for (c = 0; c < 23; c++) {
         var use = document.createElementNS(SVGNS, "use");
         use.setAttribute("id", "t" + c);
         use.setAttributeNS(xlinkNS, 'href', '#seed');
-
-
-        use.setAttribute('transform', '' /*'translate(' + xPos + ',' + yPos + ')'*/);
-        var t2 = document.createElementNS(SVGNS, "animateTransform");
+        use.setAttribute('transform', '');
+        const t2 = document.createElementNS(SVGNS, "animateTransform");
         t2.setAttribute("attributeType", "xml");
         t2.setAttribute("attributeName", "transform");
         t2.setAttribute("type", "rotate");
         t2.setAttribute("values", "0 0 0;360 0 0");
         t2.setAttribute("additive", "sum");
         t2.setAttribute("repeatCount", "indefinite");
-        t2.setAttribute("dur", "" + ( 7  + (c ))*9.6 + "s");
+        t2.setAttribute("dur", "" + (7 + (c)) * 9.6 + "s");
 
         use.appendChild(t2);
         thedefs.appendChild(use);
     }
 
     c = 0;
-    for (y = 0; y < 20; y++) {
+    for (y = 0; y < 20; y++)
         for (x = 0; x < 20; x++) {
-            var xPos = outerRadius * 2 * x + (((y % 2) == 1) ? outerRadius : 0);
-            var yPos = outerRadius * 1.7 * y;
-            var use = document.createElementNS(SVGNS, "use");
+            const xPos = outerRadius * 2 * x + (((y % 2) === 1) ? outerRadius : 0);
+            const yPos = outerRadius * 1.7 * y;
+            const use = document.createElementNS(SVGNS, "use");
             use.setAttribute("id", "i" + c);
-            use.setAttributeNS(xlinkNS, 'href', '#t' + getRandomInt(0,22));
+            use.setAttributeNS(xlinkNS, 'href', '#t' + getRandomInt(0, 22));
             use.setAttribute('x', xPos);
-            use.setAttribute('y', yPos); 
+            use.setAttribute('y', yPos);
             c++;
             spinthings.appendChild(use)
         }
-    }
-
 </script>
 <p>firefox doesn't animate use webkit</p>

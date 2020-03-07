@@ -1,4 +1,4 @@
 # spin
 svg spinners
 
-http://jnorthrup.github.io/spin/
+https://jnorthrup.github.io/spin/

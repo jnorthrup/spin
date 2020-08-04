@@ -8,7 +8,7 @@ https://jnorthrup.github.io/spin/
  
  
 
-This article is a buit more recent than the code, but this visualization is a kind of open-mindedness demonstration of your brain correcting what you perceive.  you will experience your eyes involuntarily fighting the picture.
+This article is a bit more recent than the code, but this visualization is a kind of open-mindedness demonstration of your brain correcting what you perceive.  you will experience your eyes involuntarily fighting the picture.
 
 excerpt: https://nomadrs.com/open-minded-people-different-visual-perception-reality/
 

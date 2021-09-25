@@ -10,85 +10,9 @@
     </defs>
     <!--<use xlink:href=#seed transform=translate(12.8,12.8)></use>-->
 </svg>
-<script type='text/javascript'>
-    const /**
-     * @param {*} min
-     * @param {number} max
-     */
-    getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
-    const SVGNS = "http://www.w3.org/2000/svg";
-    const xlinkNS = 'http://www.w3.org/1999/xlink';
-    /**
-     * @param {string} startX
-     * @param {string} startY
-     * @param {number} startAngle
-     * @param {number} endAngle
-     * @param {string} radius
-     */
-    const generateWedgeString2 = (startX, startY, startAngle, endAngle, radius) => {
-        const x3 = Math.PI * startAngle / 180;
-        const x4 = Math.PI * endAngle / 180;
-        const x1 = startX + radius * Math.cos(x3);
-        const x2 = startX + radius * Math.cos(x4);
-        const y1 = startY + radius * Math.sin(x3);
-        const y2 = startY + radius * Math.sin(x4);
-        return "M" + startX + " " + startY + " L" + x1 + " " + y1 + " A" + radius + " " + radius + " 0 0 1 " + x2 + " " + y2 + " z";
-    };
-
-    const generateWedgeString = (startX, startY, startAngle, endAngle, radius) => {
-        const x3 = Math.PI * startAngle / 180;
-        const x4 = Math.PI * endAngle / 180;
-        const x1 = startX + radius * Math.cos(x3);
-        const x2 = startX + radius * Math.cos(x4);
-        const y1 = startY + radius * Math.sin(x3);
-        const y2 = startY + radius * Math.sin(x4);
-        return "M" + startX + " " + startY + " L" + x1 + " " + y1 + " " + x2 + " " + y2 + " z";
-    };
-
-    const outerRadius = 12.8;
-    const wedgeString = generateWedgeString(0, 0, 0, 60, outerRadius);
-
-    document.getElementById("slice1").setAttribute("d", wedgeString);
-    document.getElementById("slice2").setAttribute("d", wedgeString);
-    document.getElementById("slice3").setAttribute("d", wedgeString);
-
-    let x, y;
-
-    const theDefs = document.getElementById('thedefs');
-
-    const spinthings = document.getElementById('spinthings');
-    let c;
-
-    for (c = 0; c < 23; c++) {
-        var use = document.createElementNS(SVGNS, "use");
-        use.setAttribute("id", "t" + c);
-        use.setAttributeNS(xlinkNS, 'href', '#seed');
-        use.setAttribute('transform', '');
-        const t2 = document.createElementNS(SVGNS, "animateTransform");
-        t2.setAttribute("attributeType", "xml");
-        t2.setAttribute("attributeName", "transform");
-        t2.setAttribute("type", "rotate");
-        t2.setAttribute("values", "0 0 0;360 0 0");
-        t2.setAttribute("additive", "sum");
-        t2.setAttribute("repeatCount", "indefinite");
-        t2.setAttribute("dur", "" + (7 + (c)) * 9.6 + "s");
-
-        use.appendChild(t2);
-        thedefs.appendChild(use);
-    }
-
-    c = 0;
-    for (y = 0; y < 20; y++)
-        for (x = 0; x < 20; x++) {
-            const xPos = outerRadius * 2 * x + (((y % 2) === 1) ? outerRadius : 0);
-            const yPos = outerRadius * 1.7 * y;
-            const use = document.createElementNS(SVGNS, "use");
-            use.setAttribute("id", "i" + c);
-            use.setAttributeNS(xlinkNS, 'href', '#t' + getRandomInt(0, 22));
-            use.setAttribute('x', xPos);
-            use.setAttribute('y', yPos);
-            c++;
-            spinthings.appendChild(use)
-        }
+<script type='text/javascript'>var a,b=0*Math.PI/180,c=60*Math.PI/180;a="M0 0 L"+12.8*Math.cos(b)+" "+12.8*Math.sin(b)+" "+12.8*Math.cos(c)+" "+12.8*Math.sin(c)+" z";document.getElementById("slice1").setAttribute("d",a);document.getElementById("slice2").setAttribute("d",a);document.getElementById("slice3").setAttribute("d",a);var d,e,f=document.getElementById("spinthings"),g;
+for(g=0;23>g;g++){var h=document.createElementNS("http://www.w3.org/2000/svg","use");h.setAttribute("id","t"+g);h.setAttributeNS("http://www.w3.org/1999/xlink","href","#seed");h.setAttribute("transform","");var k=document.createElementNS("http://www.w3.org/2000/svg","animateTransform");k.setAttribute("attributeType","xml");k.setAttribute("attributeName","transform");k.setAttribute("type","rotate");k.setAttribute("values","0 0 0;360 0 0");k.setAttribute("additive","sum");k.setAttribute("repeatCount",
+"indefinite");k.setAttribute("dur",""+9.6*(7+g)+"s");h.appendChild(k);thedefs.appendChild(h)}for(e=g=0;20>e;e++)for(d=0;20>d;d++){var l=25.6*d+(1===e%2?12.8:0),m=21.76*e,n=document.createElementNS("http://www.w3.org/2000/svg","use");n.setAttribute("id","i"+g);n.setAttributeNS("http://www.w3.org/1999/xlink","href","#t"+(Math.floor(23*Math.random())+0));n.setAttribute("x",l);n.setAttribute("y",m);g++;f.appendChild(n)}
+   
 </script>
 <p>firefox doesn't animate use webkit</p>
